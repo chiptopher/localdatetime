@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import * as momentTimezone from 'moment-timezone';
 
 export const momentWithFormat = (
     formatResult: string,
@@ -9,7 +10,9 @@ export const momentWithFormat = (
         return formatResult;
     });
     if (secondFormatResult !== undefined) {
-        formatMock.mockImplementationOnce(() => {return secondFormatResult})
+        formatMock.mockImplementationOnce(() => {
+            return secondFormatResult;
+        });
     }
     // @ts-ignore
     moment.mockImplementation(() => {
@@ -17,4 +20,26 @@ export const momentWithFormat = (
             format: formatMock,
         };
     });
+};
+
+export const momentTimezoneWithFormat = (
+    expectedTimestamp: string,
+    expectedTimezone: string,
+    result: string,
+) => {
+    // @ts-ignore
+    momentTimezone.tz.mockImplementation(
+        (timestamp: string, timezone: string) => {
+            let finalResult = '';
+            if (
+                timezone === expectedTimezone &&
+                expectedTimestamp === timestamp
+            ) {
+                finalResult = result;
+            }
+            return {
+                format: () => finalResult,
+            };
+        },
+    );
 };
