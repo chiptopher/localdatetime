@@ -8,15 +8,24 @@ import { TimezoneSelect } from '../components/timezone-select';
 import './index.scss';
 
 export const IndexPage = () => {
-    const [currentTimezone, setCurrentTimezone] = useState('');
+    const [currentTimezone, setCurrentTimezone] = useState<undefined | string>(
+        undefined,
+    );
     return (
         <Layout className="index">
-            <CurrentTime utcTimezone={currentTimezone} />
+            <span>Time in your current timezone</span>
+            <CurrentTime />
             <TimezoneSelect
                 onSelect={(timezone: string) => {
                     setCurrentTimezone(timezone);
                 }}
             />
+            {currentTimezone && (
+                <>
+                    <span>Time in the selected timezone</span>
+                    <CurrentTime utcTimezone={currentTimezone} />
+                </>
+            )}
         </Layout>
     );
 };

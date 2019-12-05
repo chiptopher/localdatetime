@@ -11,7 +11,6 @@ test('should show the time', async () => {
     momentWithFormat('2018–01–30T12:34:56+00:00');
     const component = render(<IndexPage />);
 
-    expect(await component.findByText('Current time in your timezone'));
     expect(await component.findByText('2018–01–30T12:34:56+00:00'));
 });
 
@@ -25,7 +24,7 @@ test('selecting a country and the a timezone should show the time in that timezo
     const defaultTime = '2018–01–30T12:00:00+00:00';
     const timeInDifferentTimezone = '2018–01–30T08:00:00-04:00';
 
-    momentWithFormat(defaultTime);
+    momentWithFormat(defaultTime, defaultTime);
     momentTimezoneWithFormat(
         defaultTime,
         'America/New_York',

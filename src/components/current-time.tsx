@@ -4,7 +4,7 @@ import * as momentTimezone from 'moment-timezone';
 import { useEffect, useState } from 'react';
 
 interface Props {
-    utcTimezone: string;
+    utcTimezone?: string;
 }
 
 export const CurrentTime = (props: Props) => {
@@ -23,7 +23,7 @@ export const CurrentTime = (props: Props) => {
 };
 
 const formatTime = (rawTime: string, utcTimezone: string): string => {
-    if (utcTimezone === '') {
+    if (utcTimezone === undefined) {
         return rawTime;
     } else {
         return momentTimezone.tz(rawTime, utcTimezone).format();
