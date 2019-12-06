@@ -37,9 +37,9 @@ mockResult['America/Detroit'] = {
     dstOffsetStr: '-04:00',
     aliasOf: null,
 };
-mockResult['Africa/Accra'] = {
-    name: 'Africa/Accra',
-    country: 'GH',
+mockResult['Europe/Paris'] = {
+    name: 'Europe/Paris',
+    country: 'FR',
     utcOffset: 0,
     utcOffsetStr: '+00:00',
     dstOffset: 0,
@@ -50,5 +50,18 @@ mockResult['Africa/Accra'] = {
 jest.mock('countries-and-timezones', () => {
     return {
         getAllTimezones: jest.fn().mockImplementation(() => mockResult),
+        getCountry: jest.fn().mockImplementation(id => {
+            if (id === 'US') {
+                return {
+                    id: 'US',
+                    name: 'United States',
+                };
+            } else if (id === 'FR') {
+                return {
+                    id: 'FR',
+                    name: 'France',
+                };
+            }
+        }),
     };
 });

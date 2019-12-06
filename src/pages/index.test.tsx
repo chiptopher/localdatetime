@@ -32,7 +32,10 @@ test('selecting a country and the a timezone should show the time in that timezo
     );
 
     const component = render(<IndexPage />);
-    await selectEvent.select(await component.findByLabelText('Country'), 'US');
+    await selectEvent.select(
+        await component.findByLabelText('Country'),
+        'United States',
+    );
     await selectEvent.select(
         await component.findByLabelText('Timezone'),
         'America/New_York',
