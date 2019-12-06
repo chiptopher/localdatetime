@@ -13,35 +13,39 @@ export const TimezoneSelect = (props: Props) => {
     const allTimezones = allTimezonesGroupedByCountry();
     return (
         <div className="timezone-select">
-            <label htmlFor="country">Country</label>
-            <Select
-                inputId="country"
-                options={allTimezones.map(group => {
-                    return { value: group.country, label: group.country };
-                })}
-                onChange={(selectedOption: any) => {
-                    setCountry(selectedOption.value);
-                }}
-            />
-            {country !== '' && (
-                <>
-                    <label htmlFor="timezone">Timezone</label>
-                    <Select
-                        options={allTimezones
-                            .find(group => group.country === country)
-                            .timezones.map(timezone => {
-                                return {
-                                    value: timezone.name,
-                                    label: timezone.name,
-                                };
-                            })}
-                        onChange={(selectOpetion: any) => {
-                            props.onSelect(selectOpetion.value);
-                        }}
-                        inputId="timezone"
-                    />
-                </>
-            )}
+            <div className="label-and-select">
+                <label htmlFor="country">Country</label>
+                <Select
+                    inputId="country"
+                    options={allTimezones.map(group => {
+                        return { value: group.country, label: group.country };
+                    })}
+                    onChange={(selectedOption: any) => {
+                        setCountry(selectedOption.value);
+                    }}
+                />
+            </div>
+            <div className="label-and-select">
+                <label htmlFor="timezone">Timezone</label>
+                <Select
+                    options={
+                        country === ''
+                            ? []
+                            : allTimezones
+                                  .find(group => group.country === country)
+                                  .timezones.map(timezone => {
+                                      return {
+                                          value: timezone.name,
+                                          label: timezone.name,
+                                      };
+                                  })
+                    }
+                    onChange={(selectOpetion: any) => {
+                        props.onSelect(selectOpetion.value);
+                    }}
+                    inputId="timezone"
+                />
+            </div>
         </div>
     );
 };

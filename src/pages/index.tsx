@@ -13,19 +13,26 @@ export const IndexPage = () => {
     );
     return (
         <Layout className="index">
-            <span>Time in your current timezone</span>
-            <CurrentTime />
-            <TimezoneSelect
-                onSelect={(timezone: string) => {
-                    setCurrentTimezone(timezone);
-                }}
-            />
-            {currentTimezone && (
-                <>
-                    <span>Time in the selected timezone</span>
-                    <CurrentTime utcTimezone={currentTimezone} />
-                </>
-            )}
+            <div className="content">
+                <h1>localdatetime</h1>
+                <div className="current-timezone">
+                    <h3>Time in your current timezone</h3>
+                    <CurrentTime />
+                </div>
+                <div>
+                    <TimezoneSelect
+                        onSelect={(timezone: string) => {
+                            setCurrentTimezone(timezone);
+                        }}
+                    />
+                    {currentTimezone && (
+                        <div>
+                            <h3>Time in the selected timezone</h3>
+                            <CurrentTime utcTimezone={currentTimezone} />
+                        </div>
+                    )}
+                </div>
+            </div>
         </Layout>
     );
 };
