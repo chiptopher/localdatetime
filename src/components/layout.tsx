@@ -8,8 +8,9 @@
 import * as React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 
-import './layout.scss';
 import SEO from './seo';
+
+import './layout.scss';
 
 export const Layout = (props: LayoutProps) => (
     <StaticQuery
@@ -26,6 +27,14 @@ export const Layout = (props: LayoutProps) => (
             <div className="layout">
                 <SEO title="" />
                 <main className={props.className}>{props.children}</main>
+                <footer>
+                    <a
+                        href="https://github.com/chiptopher/localdatetime"
+                        target="_blank"
+                    >
+                        <span>Source for this Page</span>
+                    </a>
+                </footer>
             </div>
         )}
     />
