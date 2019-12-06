@@ -17,9 +17,14 @@ export const TimezoneSelect = (props: Props) => {
                 <label htmlFor="country">Country</label>
                 <Select
                     inputId="country"
-                    options={allTimezones.map(group => {
-                        return { value: group.country, label: group.country };
-                    })}
+                    options={allTimezones
+                        .map(group => {
+                            return {
+                                value: group.country,
+                                label: group.country,
+                            };
+                        })
+                        .sort((a, b) => (a.label > b.label) ? 1 : -1)}
                     onChange={(selectedOption: any) => {
                         setCountry(selectedOption.value);
                     }}
