@@ -1,5 +1,7 @@
 @import '../styleguide.scss';
 
+$mobile-gutter-width: 8px;
+
 .index {
     width: 100%;
     padding-top: 24px;
@@ -10,11 +12,15 @@
     justify-content: center;
 
     .content {
+        width: $phone-size;
+        @include on-phones {
+            width: calc(100% - calc(2 * #{$mobile-gutter-width}));
+        }
+
         h1 {
             padding-bottom: 32px;
             color: $primary;
         }
-        width: 800px;
         .current-timezone {
             color: white;
             display: flex;
