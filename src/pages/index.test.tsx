@@ -6,6 +6,7 @@ import { IndexPage } from '.';
 import { momentWithFormat, momentTimezoneWithFormat } from '../moment-mock';
 
 import selectEvent from 'react-select-event';
+import userEvent from '@testing-library/user-event';
 
 test('should show the time', async () => {
     momentWithFormat('2018–01–30T12:34:56+00:00');

@@ -2,6 +2,9 @@ import * as React from 'react';
 import * as moment from 'moment';
 import * as momentTimezone from 'moment-timezone';
 import { useEffect, useState } from 'react';
+import * as CopyToClipboard from 'react-copy-to-clipboard';
+
+import './current-time.scss';
 
 interface Props {
     utcTimezone?: string;
@@ -9,6 +12,8 @@ interface Props {
 
 export const CurrentTime = (props: Props) => {
     const [currentTime, setCurrentTime] = useState();
+    const [copied, setCopied] = useState(false);
+
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTime(moment().format());
@@ -16,9 +21,19 @@ export const CurrentTime = (props: Props) => {
         return () => clearInterval(interval);
     }, []);
     return (
-        <>
+        <div>
             <span>{formatTime(currentTime, props.utcTimezone)}</span>
-        </>
+            {!copied ? (
+                <CopyToClipboard
+                    text={currentTime}
+                    onCopy={() => setCopied(true)}
+                >
+                    <span className="copy">Copy</span>
+                </CopyToClipboard>
+            ) : (
+                <span className="coppied">Timestamp copied!</span>
+            )}
+        </div>
     );
 };
 
