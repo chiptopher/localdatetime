@@ -65,13 +65,15 @@ const Container = styled.div`
     }
 
     main {
-        width: 700px;
-
         flex-grow: 1;
     }
 
     footer {
         height: 5rem;
+    }
+
+    main, footer {
         width: 700px;
+        max-width: 95vw;
     }
 `;
